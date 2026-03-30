@@ -1,0 +1,1782 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Core Tech Assist | IT Support Specialist</title>
+  <meta
+    name="description"
+    content="Core Tech Assist provides approachable IT support, hardware repair, Wi-Fi help, cloud setup, custom PC builds, and remote support."
+  />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Orbitron:wght@600;700;800;900&family=Rajdhani:wght@500;600;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <style>
+    :root {
+      --bg: #050505;
+      --bg-2: #090909;
+      --panel: rgba(255, 255, 255, 0.05);
+      --panel-2: rgba(255, 255, 255, 0.03);
+      --border: rgba(255, 122, 0, 0.22);
+      --border-strong: rgba(255, 122, 0, 0.4);
+      --orange: #ff7a00;
+      --orange-2: #ff9d00;
+      --white: #ffffff;
+      --text: #ededed;
+      --muted: #b7b7b7;
+      --muted-2: #8a8a8a;
+      --radius: 22px;
+      --radius-sm: 14px;
+      --max: 1220px;
+      --nav-h: 80px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Inter", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 10% 15%, rgba(255, 122, 0, 0.14), transparent 0 22%),
+        radial-gradient(circle at 85% 16%, rgba(255, 122, 0, 0.12), transparent 0 18%),
+        radial-gradient(circle at 18% 80%, rgba(255, 122, 0, 0.08), transparent 0 20%),
+        radial-gradient(circle at 80% 74%, rgba(255, 122, 0, 0.10), transparent 0 22%),
+        linear-gradient(135deg, rgba(255, 122, 0, 0.04) 0%, transparent 20%, transparent 80%, rgba(255, 122, 0, 0.04) 100%),
+        linear-gradient(180deg, #050505 0%, #070707 42%, #090909 100%);
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: -3;
+      background:
+        radial-gradient(circle at center, transparent 0 58%, rgba(255,255,255,0.012) 58.5%, transparent 59%),
+        radial-gradient(circle at center, transparent 0 68%, rgba(255,255,255,0.01) 68.5%, transparent 69%),
+        radial-gradient(circle at center, transparent 0 78%, rgba(255,255,255,0.008) 78.5%, transparent 79%);
+      opacity: 0.5;
+      transform: scale(1.35);
+    }
+
+    canvas#particles {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      width: min(var(--max), calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .section {
+      padding: 110px 0;
+      position: relative;
+    }
+
+    .section-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 18px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: rgba(255, 122, 0, 0.08);
+      color: #ffd8b2;
+      font-family: "Rajdhani", sans-serif;
+      font-weight: 700;
+      font-size: 0.86rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .section-title {
+      margin: 0 0 12px;
+      color: var(--white);
+      font-family: "Orbitron", sans-serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      line-height: 1.02;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-shadow: 0 0 16px rgba(255, 122, 0, 0.16);
+    }
+
+    .section-copy {
+      max-width: 760px;
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.8;
+      font-size: 1.04rem;
+    }
+
+    .glow-line {
+      width: 130px;
+      height: 4px;
+      margin-top: 22px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, var(--orange), var(--orange-2), transparent);
+      box-shadow: 0 0 18px rgba(255, 122, 0, 0.5);
+    }
+
+    .panel,
+    .hero-panel,
+    .visual-panel,
+    .info-card,
+    .service-card,
+    .price-group,
+    .contact-card,
+    .contact-form-card,
+    .popup-box {
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.025)),
+        rgba(8,8,8,0.76);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: var(--radius);
+      box-shadow:
+        0 18px 60px rgba(0,0,0,0.34),
+        0 0 0 1px rgba(255, 122, 0, 0.03) inset;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .panel::before,
+    .hero-panel::before,
+    .visual-panel::before,
+    .info-card::before,
+    .service-card::before,
+    .price-group::before,
+    .contact-card::before,
+    .contact-form-card::before,
+    .popup-box::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background:
+        linear-gradient(135deg, rgba(255,122,0,0.08), transparent 32%),
+        radial-gradient(circle at top right, rgba(255,157,0,0.08), transparent 30%);
+    }
+
+    header.site-header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      min-height: var(--nav-h);
+      backdrop-filter: blur(18px);
+      background: rgba(4, 4, 4, 0.8);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .nav {
+      min-height: var(--nav-h);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      min-width: 0;
+    }
+
+    .brand-badge {
+      width: 48px;
+      height: 48px;
+      border-radius: 14px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.04);
+      box-shadow: 0 0 18px rgba(255, 122, 0, 0.16);
+      flex-shrink: 0;
+    }
+
+    .brand-title {
+      color: var(--white);
+      font-family: "Orbitron", sans-serif;
+      font-weight: 800;
+      font-size: 0.98rem;
+      line-height: 1.02;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      text-shadow: 0 0 12px rgba(255, 122, 0, 0.12);
+    }
+
+    .brand-sub {
+      margin-top: 4px;
+      color: var(--muted-2);
+      font-family: "Rajdhani", sans-serif;
+      font-size: 0.86rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      gap: 10px;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      padding: 10px 14px;
+      border-radius: 999px;
+      font-family: "Rajdhani", sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      transition: 0.25s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--white);
+      background: rgba(255,255,255,0.04);
+    }
+
+    .nav-cta {
+      color: var(--white) !important;
+      border: 1px solid var(--border);
+      background: linear-gradient(180deg, rgba(255,122,0,0.18), rgba(255,122,0,0.08));
+      box-shadow: 0 0 18px rgba(255, 122, 0, 0.16);
+    }
+
+    .hero {
+      padding-top: 70px;
+      padding-bottom: 100px;
+    }
+
+    .hero-wrap {
+      display: grid;
+      grid-template-columns: 1.12fr 0.88fr;
+      gap: 34px;
+      align-items: stretch; /* Modified from center to match heights */
+    }
+
+    .hero-panel,
+    .visual-panel,
+    .contact-card,
+    .contact-form-card,
+    .price-group {
+      padding: 28px;
+    }
+
+    .hero-logo-strip {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-bottom: 24px;
+    }
+
+    .hero-logo-main {
+      width: min(540px, 100%);
+      filter: drop-shadow(0 0 22px rgba(255, 122, 0, 0.2));
+    }
+
+    .hero-logo-mini {
+      width: 110px;
+      filter: drop-shadow(0 0 18px rgba(255, 122, 0, 0.22));
+    }
+
+    .hero-title {
+      margin: 0;
+      color: var(--white);
+      font-family: "Orbitron", sans-serif;
+      font-size: clamp(2.4rem, 6vw, 5rem);
+      line-height: 0.94;
+      letter-spacing: 0.06em;
+      font-weight: 900;
+      text-transform: uppercase;
+      text-shadow:
+        0 0 18px rgba(255, 122, 0, 0.1),
+        0 0 2px rgba(255,255,255,0.14);
+    }
+
+    .hero-title span {
+      color: #ffb14d;
+      text-shadow:
+        0 0 24px rgba(255, 157, 0, 0.22),
+        0 0 40px rgba(255, 122, 0, 0.1);
+    }
+
+    .hero-subtitle {
+      margin: 16px 0 0;
+      color: #ffdcb8;
+      font-family: "Rajdhani", sans-serif;
+      font-size: clamp(1.05rem, 2vw, 1.35rem);
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    .hero-copy {
+      margin: 22px 0 0;
+      max-width: 720px;
+      color: var(--muted);
+      font-size: 1.05rem;
+      line-height: 1.8;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 28px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 52px;
+      padding: 0 22px;
+      border-radius: 14px;
+      border: 1px solid transparent;
+      cursor: pointer;
+      font-family: "Rajdhani", sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      transition: 0.2s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn-primary {
+      color: #111;
+      background: linear-gradient(180deg, #ffb14d, #ff7a00);
+      box-shadow: 0 0 28px rgba(255, 122, 0, 0.24);
+    }
+
+    .btn-secondary {
+      color: var(--white);
+      background: rgba(255,255,255,0.04);
+      border-color: var(--border);
+    }
+
+    .hero-points {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 28px;
+    }
+
+    .info-card {
+      padding: 18px;
+    }
+
+    .info-card h3 {
+      margin: 0 0 8px;
+      color: var(--white);
+      font-family: "Rajdhani", sans-serif;
+      font-size: 1.14rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .info-card p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.65;
+      font-size: 0.96rem;
+    }
+
+    .visual-chip {
+      display: inline-flex;
+      align-items: center;
+      width: fit-content;
+      margin-bottom: 18px;
+      padding: 14px 16px;
+      border-radius: 18px;
+      border: 1px solid var(--border);
+      background: rgba(255,122,0,0.06);
+      color: #ffdcb8;
+      font-family: "Rajdhani", sans-serif;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .visual-title {
+      margin: 0 0 12px;
+      color: var(--white);
+      font-family: "Orbitron", sans-serif;
+      font-size: 2rem;
+      line-height: 1.03;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .visual-copy {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.8;
+    }
+
+    .visual-stats {
+      display: grid;
+      gap: 20px; /* Increased from 14px to fill vertical space */
+      margin-top: 30px; /* Increased from 24px */
+    }
+
+    .visual-stat {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 22px 18px; /* Increased padding to increase height */
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,0.06);
+      background: rgba(255,255,255,0.03);
+    }
+
+    .visual-stat strong {
+      display: block;
+      margin-bottom: 4px;
+      color: var(--white);
+      font-family: "Rajdhani", sans-serif;
+      font-size: 1.06rem;
+      font-weight: 700;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+    }
+
+    .visual-stat span {
+      color: var(--muted);
+      font-size: 0.93rem;
+    }
+
+    .visual-stat b {
+      color: #ffb14d;
+      white-space: nowrap;
+      font-family: "Orbitron", sans-serif;
+      font-size: 1.02rem;
+    }
+
+    /* --- HANGMAN STYLES --- */
+    .hangman-embed {
+      background: rgba(255, 122, 0, 0.03);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 15px;
+      margin-bottom: 25px;
+      text-align: center;
+      position: relative;
+    }
+
+    .hangman-header {
+      font-family: "Rajdhani", sans-serif;
+      font-weight: 700;
+      font-size: 0.8rem;
+      letter-spacing: 0.1em;
+      color: var(--orange);
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    .hangman-area {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .hangman-drawing {
+      width: 80px;
+      height: 80px;
+      position: relative;
+      border-bottom: 2px solid var(--muted-2);
+    }
+
+    .part { display: none; position: absolute; background: var(--orange); }
+    .p-head { width: 16px; height: 16px; border-radius: 50%; border: 2px solid var(--orange); top: 10px; left: 32px; background: none; }
+    .p-body { width: 2px; height: 30px; top: 26px; left: 39px; }
+    .p-arm-l { width: 15px; height: 2px; top: 35px; left: 25px; transform: rotate(-30deg); }
+    .p-arm-r { width: 15px; height: 2px; top: 35px; left: 40px; transform: rotate(30deg); }
+    .p-leg-l { width: 15px; height: 2px; top: 60px; left: 27px; transform: rotate(-45deg); }
+    .p-leg-r { width: 15px; height: 2px; top: 60px; left: 38px; transform: rotate(45deg); }
+    .visible { display: block; }
+
+    .hangman-word {
+      font-family: "Orbitron", sans-serif;
+      font-size: 1.2rem;
+      letter-spacing: 4px;
+      color: var(--white);
+      min-height: 1.5em;
+    }
+
+    .hangman-keys {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(28px, 1fr));
+      gap: 4px;
+      width: 100%;
+      margin-top: 10px;
+    }
+
+    .h-key {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      color: var(--white);
+      font-family: "Rajdhani", sans-serif;
+      font-weight: 700;
+      font-size: 0.75rem;
+      padding: 5px 0;
+      cursor: pointer;
+      border-radius: 4px;
+      transition: 0.2s;
+    }
+
+    .h-key:hover:not(:disabled) { background: var(--orange); color: #000; border-color: var(--orange); }
+    .h-key:disabled { opacity: 0.2; cursor: not-allowed; }
+
+    .h-msg {
+      font-family: "Rajdhani", sans-serif;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-top: 8px;
+      min-height: 1.2em;
+    }
+
+    .h-reset {
+      margin-top: 10px;
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--orange);
+      font-family: "Rajdhani", sans-serif;
+      font-weight: 700;
+      font-size: 0.7rem;
+      padding: 4px 12px;
+      border-radius: 999px;
+      cursor: pointer;
+      text-transform: uppercase;
+    }
+
+    .h-reset:hover { background: rgba(255,122,0,0.1); }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 18px;
+      margin-top: 34px;
+    }
+
+    .service-card {
+      padding: 24px;
+      box-shadow: 0 16px 40px rgba(0,0,0,0.22);
+    }
+
+    .service-card::after {
+      content: "";
+      position: absolute;
+      inset: auto -40px -40px auto;
+      width: 130px;
+      height: 130px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255,122,0,0.14), transparent 70%);
+      pointer-events: none;
+    }
+
+    .service-icon {
+      width: 52px;
+      height: 52px;
+      display: grid;
+      place-items: center;
+      margin-bottom: 18px;
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      background: rgba(255, 122, 0, 0.08);
+      color: #ffcc8f;
+      font-size: 1.25rem;
+    }
+
+    .service-card h3 {
+      margin: 0 0 10px;
+      color: var(--white);
+      font-family: "Rajdhani", sans-serif;
+      font-size: 1.16rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .service-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.96rem;
+      line-height: 1.75;
+    }
+
+    .pricing-area {
+      display: grid;
+      gap: 22px;
+      margin-top: 36px;
+    }
+
+    .price-group-header {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-bottom: 18px;
+    }
+
+    .price-group-title {
+      margin: 0;
+      color: var(--white);
+      font-family: "Orbitron", sans-serif;
+      font-size: clamp(1.3rem, 3vw, 1.8rem);
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      text-shadow: 0 0 14px rgba(255, 122, 0, 0.12);
+    }
+
+    .price-group-sub {
+      margin: 6px 0 0;
+      max-width: 760px;
+      color: var(--muted);
+      font-size: 0.97rem;
+      line-height: 1.7;
+    }
+
+    .price-group-tag {
+      padding: 8px 12px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: rgba(255,122,0,0.08);
+      color: #ffd8b2;
+      font-family: "Rajdhani", sans-serif;
+      font-size: 0.84rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .price-list {
+      display: grid;
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .price-row {
+      display: grid;
+      grid-template-columns: 1.35fr 0.6fr 0.8fr;
+      gap: 16px;
+      align-items: center;
+      padding: 16px 18px;
+      border-radius: 16px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.06);
+      transition: 0.2s ease;
+    }
+
+    .price-row.two-col {
+      grid-template-columns: 1.4fr 0.75fr;
+    }
+
+    .price-row:hover {
+      transform: translateY(-2px);
+      border-color: var(--border-strong);
+      box-shadow: 0 0 24px rgba(255, 122, 0, 0.08);
+    }
+
+    .price-name {
+      margin: 0;
+      color: var(--white);
+      font-weight: 700;
+      font-size: 1rem;
+    }
+
+    .price-detail {
+      margin: 6px 0 0;
+      color: var(--muted);
+      font-size: 0.93rem;
+      line-height: 1.6;
+    }
+
+    .price-fee,
+    .price-turnaround {
+      text-align: right;
+    }
+
+    .price-label {
+      display: block;
+      margin-bottom: 5px;
+      color: var(--muted-2);
+      font-family: "Rajdhani", sans-serif;
+      font-size: 0.76rem;
+      font-weight: 700;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+    }
+
+    .price-value {
+      color: #ffcb8b;
+      font-weight: 800;
+      font-size: 1rem;
+    }
+
+    .price-note {
+      margin-top: 18px;
+      padding: 16px 18px;
+      border-left: 3px solid var(--orange);
+      border-radius: 14px;
+      background: rgba(255,122,0,0.07);
+      color: var(--muted);
+      line-height: 1.75;
+      font-size: 0.95rem;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 0.95fr 1.05fr;
+      gap: 22px;
+      margin-top: 34px;
+    }
+
+    .contact-list {
+      display: grid;
+      gap: 14px;
+      margin-top: 18px;
+    }
+
+    .contact-item {
+      padding: 16px 18px;
+      border-radius: 16px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .contact-item strong {
+      display: block;
+      margin-bottom: 6px;
+      color: var(--white);
+      font-family: "Rajdhani", sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .contact-item span,
+    .contact-item a {
+      color: var(--muted);
+      line-height: 1.7;
+      word-break: break-word;
+    }
+
+    .contact-form {
+      display: grid;
+      gap: 14px;
+      margin-top: 18px;
+    }
+
+    .field-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .input,
+    .textarea {
+      width: 100%;
+      padding: 14px 16px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.04);
+      color: var(--white);
+      font: inherit;
+      outline: none;
+      transition: 0.2s ease;
+    }
+
+    .input:focus,
+    .textarea:focus {
+      border-color: var(--border-strong);
+      box-shadow: 0 0 0 3px rgba(255, 122, 0, 0.12);
+      background: rgba(255,255,255,0.055);
+    }
+
+    .textarea {
+      min-height: 150px;
+      resize: vertical;
+    }
+
+    .form-note {
+      margin: 6px 0 0;
+      color: var(--muted-2);
+      font-size: 0.9rem;
+      line-height: 1.65;
+    }
+
+    footer {
+      padding: 28px 0 44px;
+      text-align: center;
+      color: var(--muted-2);
+      font-size: 0.92rem;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(34px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    .reveal.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .popup {
+      position: fixed;
+      inset: 0;
+      z-index: 2000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      background: rgba(0,0,0,0.72);
+      backdrop-filter: blur(8px);
+      transition: opacity 0.25s ease, visibility 0.25s ease;
+    }
+
+    .popup.hidden {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    .popup-box {
+      width: min(520px, 100%);
+      padding: 28px;
+      border: 1px solid var(--border-strong);
+      box-shadow:
+        0 22px 70px rgba(0,0,0,0.45),
+        0 0 34px rgba(255, 122, 0, 0.16);
+    }
+
+    .popup-close {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.1);
+      background: rgba(255,255,255,0.04);
+      color: var(--white);
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: 0.2s ease;
+    }
+
+    .popup-close:hover {
+      background: rgba(255,255,255,0.09);
+      border-color: var(--border);
+    }
+
+    .popup h2 {
+      margin: 0 0 12px;
+      color: var(--white);
+      font-family: "Orbitron", sans-serif;
+      font-size: clamp(1.7rem, 4vw, 2.2rem);
+      line-height: 1.05;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .popup p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.75;
+    }
+
+    .popup-form {
+      display: grid;
+      gap: 12px;
+      margin-top: 20px;
+    }
+
+    .popup-note {
+      margin-top: 10px;
+      color: var(--muted-2);
+      font-size: 0.88rem;
+      line-height: 1.6;
+    }
+
+    @media (max-width: 1100px) {
+      .hero-wrap,
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .services-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .hero-points {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .section {
+        padding: 84px 0;
+      }
+
+      .nav {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 14px 0;
+      }
+
+      .nav-links {
+        justify-content: flex-start;
+        width: 100%;
+      }
+
+      .hero-panel,
+      .visual-panel,
+      .contact-card,
+      .contact-form-card,
+      .price-group,
+      .popup-box {
+        padding: 22px;
+      }
+
+      .services-grid,
+      .field-row {
+        grid-template-columns: 1fr;
+      }
+
+      .price-row,
+      .price-row.two-col {
+        grid-template-columns: 1fr;
+      }
+
+      .price-fee,
+      .price-turnaround {
+        text-align: left;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      .reveal {
+        opacity: 1;
+        transform: none;
+        transition: none;
+      }
+
+      .btn,
+      .price-row,
+      .popup,
+      .popup-close,
+      .nav-links a {
+        transition: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <canvas id="particles"></canvas>
+
+  <div class="popup" id="joinPopup" aria-hidden="false">
+    <div class="popup-box">
+      <button class="popup-close" id="closePopup" aria-label="Close popup">✕</button>
+      <div class="section-kicker">Join the Core Tech Family</div>
+      <h2>Stay Connected</h2>
+      <p>
+        Get updates, service announcements, and simple ways to stay in touch with Core Tech Assist.
+      </p>
+
+      <form class="popup-form" action="https://formspree.io/f/xeeeqkew" method="POST">
+        <input class="input" type="text" name="name" placeholder="Your name" />
+        <input class="input" type="email" name="email" placeholder="Your email" required />
+        <input type="hidden" name="_subject" value="New Core Tech Family signup" />
+        <button class="btn btn-primary" type="submit">Join Now</button>
+      </form>
+
+      <div class="popup-note">
+        Not interested right now? Tap the X and keep browsing.
+      </div>
+    </div>
+  </div>
+
+  <header class="site-header">
+    <div class="container nav">
+      <a href="#home" class="brand" aria-label="Core Tech Assist home">
+        <div class="brand-badge">
+          <img
+            src="https://i.postimg.cc/KjKxV1wY/ecb986ef_f3a9_4606_be9d_0ec89210eb44.png"
+            alt="Core Tech Assist badge logo"
+          />
+        </div>
+        <div>
+          <div class="brand-title">Core Tech Assist</div>
+          <div class="brand-sub">IT Support Specialist</div>
+        </div>
+      </a>
+
+      <nav class="nav-links" aria-label="Primary navigation">
+        <a href="#home">Home</a>
+        <a href="#services">Services</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#contact">Contact</a>
+        <a href="#contact" class="nav-cta">Free Consult</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="section hero" id="home">
+      <div class="container hero-wrap">
+        <div class="hero-panel reveal">
+          <div class="hero-logo-strip">
+            <img
+              class="hero-logo-main"
+              src="https://i.postimg.cc/CKMHbgmD/33a60556_f477_4da1_a492_a7239339ab14.png"
+              alt="Core Tech Assist main logo"
+            />
+            <img
+              class="hero-logo-mini"
+              src="https://i.postimg.cc/KjKxV1wY/ecb986ef_f3a9_4606_be9d_0ec89210eb44.png"
+              alt="Core Tech Assist icon logo"
+            />
+          </div>
+
+          <h1 class="hero-title">Simple Tech. <span>Real Support.</span></h1>
+          <p class="hero-subtitle">IT Support Specialist</p>
+
+          <p class="hero-copy">
+            Reliable support for homes, home offices, and growing businesses. From repairs and upgrades to Wi-Fi help, remote support, and business setup, Core Tech Assist delivers practical service without the confusion.
+          </p>
+
+          <div class="hero-actions">
+            <a href="#pricing" class="btn btn-primary">View Pricing</a>
+            <a href="#contact" class="btn btn-secondary">Contact Me</a>
+          </div>
+
+          <div class="hero-points">
+            <div class="info-card">
+              <h3>Free 30-Minute Consult</h3>
+              <p>Book a free 30-minute consult using the scheduler on this page.</p>
+            </div>
+
+            <div class="info-card">
+              <h3>Remote + Local Support</h3>
+              <p>Remote help is available, with select on-site support for the OKC area listed in your service menu.</p>
+            </div>
+
+            <div class="info-card">
+              <h3>Clear, Practical Help</h3>
+              <p>Straightforward service focused on solving the problem and helping you understand what comes next.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="visual-panel reveal">
+          <div class="visual-chip">Core Tech Assist Service Menu</div>
+
+          <div class="hangman-embed">
+            <div class="hangman-header">Maintenance Idle: Diagnostic Game</div>
+            <div class="hangman-area">
+              <div class="hangman-drawing">
+                <div class="part p-head" id="h-0"></div>
+                <div class="part p-body" id="h-1"></div>
+                <div class="part p-arm-l" id="h-2"></div>
+                <div class="part p-arm-r" id="h-3"></div>
+                <div class="part p-leg-l" id="h-4"></div>
+                <div class="part p-leg-r" id="h-5"></div>
+              </div>
+              <div class="hangman-word" id="h-word">_ _ _ _ _ _</div>
+              <div class="hangman-keys" id="h-keys"></div>
+              <div class="h-msg" id="h-msg"></div>
+              <button class="h-reset" id="h-reset">New Diagnostic</button>
+            </div>
+          </div>
+          <h2 class="visual-title">Services Offered</h2>
+          <p class="visual-copy">
+            Professional support for home users, business clients, computer repairs, remote troubleshooting, and web services.
+          </p>
+
+          <div class="visual-stats">
+            <div class="visual-stat">
+              <div>
+                <strong>Home Tech Support</strong>
+                <span>Internet setup, device connection, patient walkthroughs</span>
+              </div>
+              <b>From $50/hr</b>
+            </div>
+
+            <div class="visual-stat">
+              <div>
+                <strong>Hardware & Repair</strong>
+                <span>Diagnostics, upgrades, replacement labor, recovery</span>
+              </div>
+              <b>From $35</b>
+            </div>
+
+            <div class="visual-stat">
+              <div>
+                <strong>Business & Remote</strong>
+                <span>Cloud setup, support retainers, web and remote help</span>
+              </div>
+              <b>From $25</b>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="services">
+      <div class="container">
+        <div class="section-kicker reveal">What You Offer</div>
+        <h2 class="section-title reveal">Professional IT Services & Support</h2>
+        <p class="section-copy reveal">
+          Full-service support for home tech issues, computer repairs, business setup, cloud services, and remote troubleshooting.
+        </p>
+        <div class="glow-line reveal"></div>
+
+        <div class="services-grid">
+          <div class="service-card reveal">
+            <div class="service-icon">🏠</div>
+            <h3>Home Tech Support</h3>
+            <p>Help for non-technical users, home offices, internet setup, connected devices, and one-on-one support.</p>
+          </div>
+
+          <div class="service-card reveal">
+            <div class="service-icon">🛠</div>
+            <h3>Computer Repair</h3>
+            <p>Diagnostics, tune-ups, reinstalls, upgrades, replacements, data recovery, and custom PC build labor.</p>
+          </div>
+
+          <div class="service-card reveal">
+            <div class="service-icon">☁️</div>
+            <h3>Business & Cloud</h3>
+            <p>Ongoing business support, Cloudflare services, Google Workspace onboarding, and security-focused setup.</p>
+          </div>
+
+          <div class="service-card reveal">
+            <div class="service-icon">🌐</div>
+            <h3>Remote & Web Help</h3>
+            <p>Remote diagnostics, software support, Wi-Fi troubleshooting, backup setup, and custom web packages.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="pricing">
+      <div class="container">
+        <div class="section-kicker reveal">Full Pricing</div>
+        <h2 class="section-title reveal">Complete Service Pricing</h2>
+        <p class="section-copy reveal">
+          Organized pricing for home support, business services, hardware repair, and remote or web support.
+        </p>
+        <div class="glow-line reveal"></div>
+
+        <div class="pricing-area">
+          <div class="price-group reveal">
+            <div class="price-group-header">
+              <div>
+                <h3 class="price-group-title">Patient Tech Specialist Bundles</h3>
+                <p class="price-group-sub">Jargon-free support for non-technical users and home offices.</p>
+              </div>
+              <div class="price-group-tag">Home Support</div>
+            </div>
+
+            <div class="price-list">
+              <div class="price-row two-col">
+                <div>
+                  <p class="price-name">The "Get Connected" Package</p>
+                  <p class="price-detail">Complete internet and Wi-Fi onboarding, router or mesh setup, device connection, and a patient one-on-one walkthrough.</p>
+                </div>
+                <div class="price-fee">
+                  <span class="price-label">Price</span>
+                  <span class="price-value">$99.00</span>
+                </div>
+              </div>
+
+              <div class="price-row two-col">
+                <div>
+                  <p class="price-name">Personalized Technical Support</p>
+                  <p class="price-detail">One-on-one troubleshooting for any tech issue, available on-site in the OKC area or through secure remote desktop.</p>
+                </div>
+                <div class="price-fee">
+                  <span class="price-label">Rate</span>
+                  <span class="price-value">$50.00/hr</span>
+                </div>
+              </div>
+
+              <div class="price-row two-col">
+                <div>
+                  <p class="price-name">Physical Office Deployment</p>
+                  <p class="price-detail">Workstation setup, monitor mounting, and cable management.</p>
+                </div>
+                <div class="price-fee">
+                  <span class="price-label">Price</span>
+                  <span class="price-value">$85.00</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="price-group reveal">
+            <div class="price-group-header">
+              <div>
+                <h3 class="price-group-title">Managed Business & Cloud Security</h3>
+                <p class="price-group-sub">Business support, cloud setup, and security-focused services.</p>
+              </div>
+              <div class="price-group-tag">Business Services</div>
+            </div>
+
+            <div class="price-list">
+              <div class="price-row">
+                <div>
+                  <p class="price-name">Business IT Retainer</p>
+                  <p class="price-detail">Ongoing business support with a flat monthly rate.</p>
+                </div>
+                <div class="price-fee">
+                  <span class="price-label">Setup Fee</span>
+                  <span class="price-value">—</span>
+                </div>
+                <div class="price-turnaround">
+                  <span class="price-label">Monthly Fee</span>
+                  <span class="price-value">$35.00 Flat</span>
+                </div>
+              </div>
+
+              <div class="price-row">
+                <div>
+                  <p class="price-name">Cloudflare Security Bundle</p>
+                  <p class="price-detail">Includes a security audit, DNS management, WAF protection, Zero Trust, and Cloudflare Tunnels.</p>
+                </div>
+                <div class="price-fee">
+                  <span class="price-label">Setup Fee</span>
+                  <span class="price-value">—</span>
+                </div>
+                <div class="price-turnaround">
+                  <span class="price-label">Monthly Fee</span>
+                  <span class="price-value">$60.00</span>
+                </div>
+              </div>
+
+              <div class="price-row">
+                <div>
+                  <p class="price-name">Google Workspace Setup</p>
+                  <p class="price-detail">Business email, shared productivity tools, scheduling, Meet, Drive, MFA, Vault, mobile management, and ownership-focused setup support.</p>
+                </div>
+                <div class="price-fee">
+                  <span class="price-label">Setup Fee</span>
+                  <span class="price-value">$50.00</span>
+                </div>
+                <div class="price-turnaround">
+                  <span class="price-label">Monthly Fee</span>
+                  <span class="price-value">$25.00</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="price-group reveal">
+            <div class="price-group-header">
+              <div>
+                <h3 class="price-group-title">Computer & Hardware Repair</h3>
+                <p class="price-group-sub">Labor rates only. Replacement parts are billed separately.</p>
+              </div>
+              <div class="price-group-tag">Repair Labor</div>
+            </div>
+
+            <div class="price-list">
+              <div class="price-row">
+                <div><p class="price-name">Diagnostic / Assessment</p></div>
+                <div class="price-fee"><span class="price-label">Price</span><span class="price-value">$35.00</span></div>
+                <div class="price-turnaround"><span class="price-label">Turnaround</span><span class="price-value">Same Day</span></div>
+              </div>
+
+              <div class="price-row">
+                <div><p class="price-name">Virus & Malware Removal</p></div>
+                <div class="price-fee"><span class="price-label">Price</span><span class="price-value">$55.00</span></div>
+                <div class="price-turnaround"><span class="price-label">Turnaround</span><span class="price-value">24-48 hrs</span></div>
+              </div>
+
+              <div class="price-row">
+                <div><p class="price-name">OS Reinstall (Win/Linux)</p></div>
+                <div class="price-fee"><span class="price-label">Price</span><span class="price-value">$60.00</span></div>
+                <div class="price-turnaround"><span class="price-label">Turnaround</span><span class="price-value">24-48 hrs</span></div>
+              </div>
+
+              <div class="price-row">
+                <div><p class="price-name">System Tune-Up & Optimization</p></div>
+                <div class="price-fee"><span class="price-label">Price</span><span class="price-value">$50.00</span></div>
+                <div class="price-turnaround"><span class="price-label">Turnaround</span><span class="price-value">Same Day</span></div>
+              </div>
+
+              <div class="price-row">
+                <div><p class="price-name">Software Troubleshooting</p></div>
+                <div class="price-fee"><span class="price-label">Price</span><span class="price-value">$45.00</span></div>
+                <div class="price-turnaround"><span class="price-label">Turnaround</span><span class="price-value">24-48 hrs</span></div>
+              </div>
+
+              <div class="price-row">
+                <div><p class="price-name">Battery Replacement</p></div>
+                <div class="price-fee"><span class="price-label">Price</span><span class="price-value">$65.00</span></div>
+                <div class="price-turnaround"><span class="price-label">Turnaround</span><span class="price-value">Same Day</span></div>
+              </div>
+
+              <div class="price-row">
+                <div><p class="price-name">RAM Upgrade</p></div>
+                <div class="price-fee"><span class="price-label">Price</span><span class="price-value">$65.00</span></div>
+                <div class="price-turnaround"><span class="price-label">Turnaround</span><span class="price-value">Same Day</span></div>
+              </div>
+
+              <div class="price-row">
+                <div><p class="price-name">SSD Upgrade / Replacement</p></div>
+                <div class="price-fee"><span class="price-label">Price</span><span class="price-value">$125.00</span></div>
+                <div class="price-turnaround"><span class="price-label">Turnaround</span><span class="price-value">24-48 hrs</span></div>
+              </div>
+
+              <div class="price-row">
+                <div><p class="price-name">LCD Screen Replacement</p></div>
+                <div class="price-fee"><span class="price-label">Price</span><span class="price-value">$120.00</span></div>
+                <div class="price-turnaround"><span class="price-label">Turnaround</span><span class="price-value">24-48 hrs</span></div>
+              </div>
+
+              <div class="price-row">
+                <div><p class="price-name">OLED Screen Replacement</p></div>
+                <div class="price-fee"><span class="price-label">Price</span><span class="price-value">$240.00</span></div>
+                <div class="price-turnaround"><span class="price-label">Turnaround</span><span class="price-value">48-72 hrs</span></div>
+              </div>
+
+              <div class="price-row">
+                <div><p class="price-name">Keyboard Replacement</p></div>
+                <div class="price-fee"><span class="price-label">Price</span><span class="price-value">$110.00</span></div>
+                <div class="price-turnaround"><span class="price-label">Turnaround</span><span class="price-value">24-48 hrs</span></div>
+              </div>
+
+              <div class="price-row">
+                <div><p class="price-name">Charging Port / Power Jack</p></div>
+                <div class="price-fee"><span class="price-label">Price</span><span class="price-value">$115.00</span></div>
+                <div class="price-turnaround"><span class="price-label">Turnaround</span><span class="price-value">24-48 hrs</span></div>
+              </div>
+
+              <div class="price-row">
+                <div><p class="price-name">Micro-Soldering</p></div>
+                <div class="price-fee"><span class="price-label">Price</span><span class="price-value">$165.00+</span></div>
+                <div class="price-turnaround"><span class="price-label">Turnaround</span><span class="price-value">48-72 hrs</span></div>
+              </div>
+
+              <div class="price-row">
+                <div><p class="price-name">Data Recovery (Standard)</p></div>
+                <div class="price-fee"><span class="price-label">Price</span><span class="price-value">$95.00</span></div>
+                <div class="price-turnaround"><span class="price-label">Turnaround</span><span class="price-value">48-72 hrs</span></div>
+              </div>
+
+              <div class="price-row">
+                <div><p class="price-name">Data Backup & Transfer</p></div>
+                <div class="price-fee"><span class="price-label">Price</span><span class="price-value">$45.00</span></div>
+                <div class="price-turnaround"><span class="price-label">Turnaround</span><span class="price-value">Same Day</span></div>
+              </div>
+
+              <div class="price-row">
+                <div><p class="price-name">Bespoke Custom PC Build</p></div>
+                <div class="price-fee"><span class="price-label">Price</span><span class="price-value">$125.00</span></div>
+                <div class="price-turnaround"><span class="price-label">Turnaround</span><span class="price-value">3-5 Days</span></div>
+              </div>
+            </div>
+
+            <div class="price-note">
+              Turnaround times are estimates based on in-stock parts. If a specific part needs to be ordered, the timeline is updated at the time of diagnostic.
+            </div>
+          </div>
+
+          <div class="price-group reveal">
+            <div class="price-group-header">
+              <div>
+                <h3 class="price-group-title">Web & Remote Support Services</h3>
+                <p class="price-group-sub">Remote troubleshooting, website help, collaboration setup, and backup-focused services.</p>
+              </div>
+              <div class="price-group-tag">Remote & Web</div>
+            </div>
+
+            <div class="price-list">
+              <div class="price-row two-col">
+                <div>
+                  <p class="price-name">Remote Diagnostic</p>
+                  <p class="price-detail">Assessment through secure remote desktop.</p>
+                </div>
+                <div class="price-fee">
+                  <span class="price-label">Price</span>
+                  <span class="price-value">$25.00</span>
+                </div>
+              </div>
+
+              <div class="price-row two-col">
+                <div>
+                  <p class="price-name">Custom Web Packages</p>
+                  <p class="price-detail">Mobile-optimized and SEO-friendly web packages.</p>
+                </div>
+                <div class="price-fee">
+                  <span class="price-label">Starting At</span>
+                  <span class="price-value">$150.00</span>
+                </div>
+              </div>
+
+              <div class="price-row two-col">
+                <div>
+                  <p class="price-name">Collaboration Portals</p>
+                  <p class="price-detail">Google Shared Drives and Team Sites setup.</p>
+                </div>
+                <div class="price-fee">
+                  <span class="price-label">Price</span>
+                  <span class="price-value">$25.00</span>
+                </div>
+              </div>
+
+              <div class="price-row two-col">
+                <div>
+                  <p class="price-name">Remote Software Help</p>
+                  <p class="price-detail">Remote troubleshooting and configuration.</p>
+                </div>
+                <div class="price-fee">
+                  <span class="price-label">Price</span>
+                  <span class="price-value">$45.00</span>
+                </div>
+              </div>
+
+              <div class="price-row two-col">
+                <div>
+                  <p class="price-name">WiFi Troubleshooting</p>
+                  <p class="price-detail">Signal optimization and security.</p>
+                </div>
+                <div class="price-fee">
+                  <span class="price-label">Price</span>
+                  <span class="price-value">$60.00</span>
+                </div>
+              </div>
+
+              <div class="price-row two-col">
+                <div>
+                  <p class="price-name">Backup Setup</p>
+                  <p class="price-detail">Encrypted off-site disaster recovery setup.</p>
+                </div>
+                <div class="price-fee">
+                  <span class="price-label">Price</span>
+                  <span class="price-value">$50.00</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="contact">
+      <div class="container">
+        <div class="section-kicker reveal">Contact & Booking</div>
+        <h2 class="section-title reveal">Reach Out Or Book A Free Consult</h2>
+        <p class="section-copy reveal">
+          Send a message directly from the site or use the scheduler badge to book your free 30-minute consult.
+        </p>
+        <div class="glow-line reveal"></div>
+
+        <div class="contact-grid">
+          <div class="contact-card reveal">
+            <h3 class="price-group-title" style="margin:0;">Core Tech Assist</h3>
+            <p class="price-group-sub" style="margin-top:8px;">
+              Honest, practical support for repairs, upgrades, Wi-Fi issues, remote help, and business setup.
+            </p>
+
+            <div class="contact-list">
+              <div class="contact-item">
+                <strong>Title</strong>
+                <span>IT Support Specialist</span>
+              </div>
+
+              <div class="contact-item">
+                <strong>Email</strong>
+                <a href="mailto:info@ctechassist.org">info@ctechassist.org</a>
+              </div>
+
+              <div class="contact-item">
+                <strong>Website</strong>
+                <a href="https://ctechassist.org" target="_blank" rel="noreferrer">ctechassist.org</a>
+              </div>
+
+              <div class="contact-item">
+                <strong>Free 30-Minute Consult</strong>
+                <span>Use the scheduler badge on this page to book your free 30-minute consult.</span>
+              </div>
+            </div>
+
+            <div class="hero-actions" style="margin-top:22px;">
+              <a class="btn btn-secondary" href="mailto:info@ctechassist.org" style="width: 100%;">Email Directly</a>
+            </div>
+          </div>
+
+          <div class="contact-form-card reveal">
+            <h3 class="price-group-title" style="margin:0;">Contact Me</h3>
+            <p class="price-group-sub" style="margin-top:8px;">
+              
+            </p>
+
+            <form class="contact-form" action="https://formspree.io/f/xeeeqkew" method="POST">
+              <div class="field-row">
+                <input class="input" type="text" name="name" placeholder="Your name" required />
+                <input class="input" type="email" name="email" placeholder="Your email" required />
+              </div>
+
+              <input class="input" type="text" name="subject" placeholder="Subject" />
+              <textarea class="textarea" name="message" placeholder="Tell me what you need help with" required></textarea>
+              <input type="hidden" name="_subject" value="New Core Tech Assist contact form message" />
+              <button class="btn btn-primary" type="submit">Send Message</button>
+            </form>
+
+            <p class="form-note">
+              The booking widget below is set for your free 30-minute consult.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet" />
+      <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
+      <script>
+        window.addEventListener("load", function () {
+          if (window.Calendly) {
+            Calendly.initBadgeWidget({
+              url: "https://calendly.com/admin-ctechassist/30min",
+              text: "Schedule Free 30-Min Consult",
+              color: "#ff7a00",
+              textColor: "#ffffff",
+              branding: true
+            });
+          }
+        });
+      </script>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">© 2026 Core Tech Assist • Simple Tech. Real Support.</div>
+  </footer>
+
+  <script>
+    // --- HANGMAN LOGIC ---
+    const hWords = ["ETHERNET", "FIREWALL", "CHIPSET", "FIRMWARE", "PROTOCOL", "DATABASE", "GATEWAY", "UPGRADE", "DIAGNOSTIC", "NETWORK"];
+    let hSelected = "", hGuessed = [], hMistakes = 0;
+
+    const hWordEl = document.getElementById("h-word");
+    const hKeysEl = document.getElementById("h-keys");
+    const hMsgEl = document.getElementById("h-msg");
+    const hResetBtn = document.getElementById("h-reset");
+
+    function hStart() {
+      hSelected = hWords[Math.floor(Math.random() * hWords.length)];
+      hGuessed = [];
+      hMistakes = 0;
+      hMsgEl.innerText = "System status: Scanning...";
+      hMsgEl.style.color = "var(--muted)";
+      document.querySelectorAll(".part").forEach(p => p.classList.remove("visible"));
+      hUpdate();
+      hDrawKeys();
+    }
+
+    function hUpdate() {
+      const display = hSelected.split("").map(l => hGuessed.includes(l) ? l : "_").join(" ");
+      hWordEl.innerText = display;
+      if (!display.includes("_")) {
+        hMsgEl.innerText = "System repaired: Access Granted";
+        hMsgEl.style.color = "var(--orange)";
+        hDisable();
+      }
+    }
+
+    function hDrawKeys() {
+      hKeysEl.innerHTML = "";
+      "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("").forEach(l => {
+        const b = document.createElement("button");
+        b.innerText = l;
+        b.className = "h-key";
+        b.onclick = () => {
+          b.disabled = true;
+          if (hSelected.includes(l)) {
+            hGuessed.push(l);
+            hUpdate();
+          } else {
+            document.getElementById(`h-${hMistakes}`).classList.add("visible");
+            hMistakes++;
+            if (hMistakes === 6) {
+              hMsgEl.innerText = "Failure: " + hSelected;
+              hMsgEl.style.color = "#ff4d4d";
+              hDisable();
+            }
+          }
+        };
+        hKeysEl.appendChild(b);
+      });
+    }
+
+    function hDisable() {
+      document.querySelectorAll(".h-key").forEach(k => k.disabled = true);
+    }
+
+    hResetBtn.onclick = hStart;
+    hStart();
+
+
+    // --- SITE LOGIC ---
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    const revealItems = document.querySelectorAll(".reveal");
+    if (!reduceMotion && "IntersectionObserver" in window) {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("show");
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12 });
+
+      revealItems.forEach((item) => observer.observe(item));
+    } else {
+      revealItems.forEach((item) => item.classList.add("show"));
+    }
+
+    const popup = document.getElementById("joinPopup");
+    const closePopupBtn = document.getElementById("closePopup");
+
+    function closePopup() {
+      popup.classList.add("hidden");
+      popup.setAttribute("aria-hidden", "true");
+    }
+
+    closePopupBtn.addEventListener("click", closePopup);
+
+    popup.addEventListener("click", (e) => {
+      if (e.target === popup) closePopup();
+    });
+
+    const canvas = document.getElementById("particles");
+    const ctx = canvas.getContext("2d", { alpha: true });
+
+    let sparks = [];
+    const SPARK_COUNT = reduceMotion ? 18 : 55;
+
+    function resizeCanvas() {
+      const ratio = Math.min(window.devicePixelRatio || 1, 2);
+      canvas.width = window.innerWidth * ratio;
+      canvas.height = window.innerHeight * ratio;
+      canvas.style.width = window.innerWidth + "px";
+      canvas.style.height = window.innerHeight + "px";
+      ctx.setTransform(1, 0, 0, 1, 0, 0);
+      ctx.scale(ratio, ratio);
+    }
+
+    function createSpark(initial = false) {
+      const w = window.innerWidth;
+      const h = window.innerHeight;
+      return {
+        x: Math.random() * w,
+        y: initial ? Math.random() * h : h + Math.random() * 120,
+        r: Math.random() * 2.1 + 0.6,
+        vx: (Math.random() - 0.5) * 0.22,
+        vy: -(Math.random() * 0.85 + 0.35),
+        alpha: Math.random() * 0.55 + 0.18,
+        glow: Math.random() * 16 + 10
+      };
+    }
+
+    function buildSparks() {
+      sparks = Array.from({ length: SPARK_COUNT }, () => createSpark(true));
+    }
+
+    function drawSparks() {
+      ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+
+      for (let i = 0; i < sparks.length; i++) {
+        const s = sparks[i];
+        s.x += s.vx;
+        s.y += s.vy;
+
+        if (s.y < -20 || s.x < -20 || s.x > window.innerWidth + 20) {
+          sparks[i] = createSpark(false);
+          continue;
+        }
+
+        const g = ctx.createRadialGradient(s.x, s.y, 0, s.x, s.y, s.glow);
+        g.addColorStop(0, `rgba(255, 210, 120, ${s.alpha})`);
+        g.addColorStop(0.35, `rgba(255, 140, 0, ${s.alpha * 0.75})`);
+        g.addColorStop(1, "rgba(255, 122, 0, 0)");
+
+        ctx.beginPath();
+        ctx.fillStyle = g;
+        ctx.arc(s.x, s.y, s.glow, 0, Math.PI * 2);
+        ctx.fill();
+
+        ctx.beginPath();
+        ctx.fillStyle = `rgba(255, 196, 120, ${Math.min(1, s.alpha + 0.25)})`;
+        ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+        ctx.fill();
+      }
+
+      if (!reduceMotion) requestAnimationFrame(drawSparks);
+    }
+
+    resizeCanvas();
+    buildSparks();
+    drawSparks();
+
+    window.addEventListener("resize", () => {
+      resizeCanvas();
+      buildSparks();
+    });
+  </script>
+</body>
+</html>
