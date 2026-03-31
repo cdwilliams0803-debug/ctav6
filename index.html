@@ -194,6 +194,8 @@
       backdrop-filter: blur(18px);
       background: rgba(4, 4, 4, 0.8);
       border-bottom: 1px solid rgba(255,255,255,0.06);
+      /* Ghost Text Support */
+      overflow: visible;
     }
 
     .nav {
@@ -251,6 +253,7 @@
       gap: 10px;
     }
 
+    /* --- GHOST TEXT HOVER UPDATE --- */
     .nav-links a {
       color: var(--muted);
       padding: 10px 14px;
@@ -260,12 +263,20 @@
       font-weight: 700;
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      transition: 0.25s ease;
+      transition: text-shadow 350ms ease-out, color 300ms ease;
+      position: relative;
     }
 
-    .nav-links a:hover {
+    .nav-links a:where(:hover,:focus-visible) {
+      outline: none;
       color: var(--white);
-      background: rgba(255,255,255,0.04);
+      text-shadow:
+        0  2ex rgba(255, 122, 0, 0.4),
+        0 -2ex rgba(255, 122, 0, 0.4),
+        0  4ex rgba(255, 122, 0, 0.2),
+        0 -4ex rgba(255, 122, 0, 0.2),
+        0  6ex rgba(255, 122, 0, 0.1),
+        0 -6ex rgba(255, 122, 0, 0.1);
     }
 
     .nav-cta {
@@ -284,7 +295,7 @@
       display: grid;
       grid-template-columns: 1.12fr 0.88fr;
       gap: 34px;
-      align-items: stretch; /* Modified from center to match heights */
+      align-items: stretch; 
     }
 
     .hero-panel,
@@ -455,8 +466,8 @@
 
     .visual-stats {
       display: grid;
-      gap: 20px; /* Increased from 14px to fill vertical space */
-      margin-top: 30px; /* Increased from 24px */
+      gap: 20px; 
+      margin-top: 30px; 
     }
 
     .visual-stat {
@@ -464,7 +475,7 @@
       align-items: center;
       justify-content: space-between;
       gap: 12px;
-      padding: 22px 18px; /* Increased padding to increase height */
+      padding: 22px 18px; 
       border-radius: 16px;
       border: 1px solid rgba(255,255,255,0.06);
       background: rgba(255,255,255,0.03);
@@ -1083,11 +1094,6 @@
               src="https://i.postimg.cc/CKMHbgmD/33a60556_f477_4da1_a492_a7239339ab14.png"
               alt="Core Tech Assist main logo"
             />
-            <img
-              class="hero-logo-mini"
-              src="https://i.postimg.cc/KjKxV1wY/ecb986ef_f3a9_4606_be9d_0ec89210eb44.png"
-              alt="Core Tech Assist icon logo"
-            />
           </div>
 
           <h1 class="hero-title">Simple Tech. <span>Real Support.</span></h1>
@@ -1105,7 +1111,7 @@
           <div class="hero-points">
             <div class="info-card">
               <h3>Free 30-Minute Consult</h3>
-              <p>Book a free 30-minute consult using the scheduler on this page.</p>
+              <p>Book a free 30-minute consult using the scheduler at the bottom of this page.</p>
             </div>
 
             <div class="info-card">
@@ -1521,7 +1527,7 @@
         <div class="section-kicker reveal">Contact & Booking</div>
         <h2 class="section-title reveal">Reach Out Or Book A Free Consult</h2>
         <p class="section-copy reveal">
-          Send a message directly from the site or use the scheduler badge to book your free 30-minute consult.
+          Send a message directly from the site or use the scheduler at the bottom to book your free 30-minute consult.
         </p>
         <div class="glow-line reveal"></div>
 
@@ -1550,7 +1556,7 @@
 
               <div class="contact-item">
                 <strong>Free 30-Minute Consult</strong>
-                <span>Use the scheduler badge on this page to book your free 30-minute consult.</span>
+                <span>Use the booking button below to schedule your free 30-minute consult.</span>
               </div>
             </div>
 
@@ -1576,35 +1582,22 @@
               <input type="hidden" name="_subject" value="New Core Tech Assist contact form message" />
               <button class="btn btn-primary" type="submit">Send Message</button>
             </form>
-
-            <p class="form-note">
-              The booking widget below is set for your free 30-minute consult.
-            </p>
           </div>
         </div>
-      </div>
 
-      <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet" />
-      <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
-      <script>
-        window.addEventListener("load", function () {
-          if (window.Calendly) {
-            Calendly.initBadgeWidget({
-              url: "https://calendly.com/admin-ctechassist/30min",
-              text: "Schedule Free 30-Min Consult",
-              color: "#ff7a00",
-              textColor: "#ffffff",
-              branding: true
-            });
-          }
-        });
-      </script>
+        <div class="reveal" style="text-align: center; margin-top: 60px;">
+           <a href="" onclick="Calendly.initPopupWidget({url: 'https://calendly.com/admin-ctechassist/30min'});return false;" class="btn btn-primary" style="padding: 18px 36px; font-size: 1.1rem; min-width: 300px;">Schedule Free 30-Min Consult</a>
+        </div>
+      </div>
     </section>
   </main>
 
   <footer>
     <div class="container">© 2026 Core Tech Assist • Simple Tech. Real Support.</div>
   </footer>
+
+  <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet" />
+  <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
 
   <script>
     // --- HANGMAN LOGIC ---
@@ -1668,7 +1661,6 @@
 
     hResetBtn.onclick = hStart;
     hStart();
-
 
     // --- SITE LOGIC ---
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
